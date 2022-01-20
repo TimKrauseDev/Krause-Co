@@ -1,6 +1,6 @@
 # Krause Co
 
-View the live version [HERE]().
+View the live version [HERE](https://krause-co.herokuapp.com/).
 
 
 
@@ -11,7 +11,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
  This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app) and deployed to [Firebase](https://firebase.google.com/). Below you can find the technology used, layout of the directories and most importantly, where to go to see the live version.
 
 ## View Live Site
-View the live version [Here]().
+View the live version [Here](https://krause-co.herokuapp.com/).
 
 
 ## Technology Used
