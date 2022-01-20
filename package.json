@@ -1,0 +1,26 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "Buy your plants from Krause Co. Website created by Tim Krause at TimKrause.dev",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "server": "nodemon index.js",
+    "client": "npm run start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TimKrauseUS/Krause-Co.git"
+  },
+  "author": "Timothy Krause <TimothyKrause@outlook.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TimKrauseUS/Krause-Co/issues"
+  },
+  "homepage": "https://github.com/TimKrauseUS/Krause-Co#readme",
+  "dependencies": {
+    "express": "^4.17.2"
+  }
+}
