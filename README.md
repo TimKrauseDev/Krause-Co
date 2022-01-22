@@ -21,6 +21,3 @@ View the live version [Here](https://krause-co.herokuapp.com/).
 - SCSS
 
 ## Directory 
-asdf
-
-    
