@@ -53,7 +53,7 @@ module.exports = (app) => {
   );
   
   //callback w/ token
-  app.get("/auth/github/callback", 
+  app.get("https://krause-co.herokuapp.com/auth/github/callback", 
     passport.authenticate('github', {
       failureRedirect: '/login'
     }),

@@ -93,7 +93,7 @@ passport.use(
     {
       clientID: keys.gitHubClientID,
       clientSecret: keys.gitHubClientSecret,
-      callbackURL: "/auth/github/callback",
+      callbackURL: "https://krause-co.herokuapp.com/auth/github/callback",
       scope: ['user:email'],
       proxy: true,
     },
