@@ -16,8 +16,6 @@ View the live version [Here](https://krause-co.herokuapp.com/).
 
 ## Technology Used
 - React
-- React Router
-- Bootstrap
-- SCSS
+- Passport
 
 ## Directory 
