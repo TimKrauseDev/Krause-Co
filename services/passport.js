@@ -33,6 +33,8 @@ passport.use(
 
       const existingUser = await User.findOne({provider: profile.provider, provider_id: profile.id });
 
+      console.log(existingUSer);
+
       if (existingUser) {
         return done(null, existingUser);
       }
@@ -64,6 +66,8 @@ passport.use(
     },
     async (accessToken, refreshToken, profile, done) => {
       const existingUser = await User.findOne({provider: profile.provider, provider_id: profile.id });
+
+      console.log(profile);
       
       if (existingUser) {
         return done(null, existingUser);
