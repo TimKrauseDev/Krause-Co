@@ -29,11 +29,7 @@ passport.use(
     },
     async (accessToken, refreshToken, profile, done) => {
 
-      console.log(profile);
-
       const existingUser = await User.findOne({provider: profile.provider, provider_id: profile.id });
-
-      console.log(existingUser);
 
       if (existingUser) {
         return done(null, existingUser);
@@ -66,9 +62,7 @@ passport.use(
     },
     async (accessToken, refreshToken, profile, done) => {
       const existingUser = await User.findOne({provider: profile.provider, provider_id: profile.id });
-
-      console.log(profile);
-      
+     
       if (existingUser) {
         return done(null, existingUser);
       }
@@ -95,18 +89,17 @@ passport.use(
       clientSecret: keys.gitHubClientSecret,
       callbackURL: "/auth/github/callback",
       proxy: true,
-      scope: ['user:email'],
+      scope: ["user:email"],
     },
     async (accessToken, refreshToken, profile, done) => {
 
-      console.log(profile)
       const existingUser = await User.findOne({provider: profile.provider, provider_id: profile.id });
       
       if (existingUser) {
          return done(null, existingUser);
       }
 
-       const user = await new User({
+      const user = await new User({
         provider: profile.provider, 
         provider_id: profile.id, 
         display_name: profile.displayName,
