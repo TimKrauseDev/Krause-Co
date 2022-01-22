@@ -24,8 +24,8 @@ passport.use(
     {
       clientID: keys.googleClientID,
       clientSecret: keys.googleClientSecret,
-      callbackURL: keys.googleCallbackURL,
-      proxy: true
+      callbackURL: "/auth/google/callback",
+      proxy: true,
     },
     async (accessToken, refreshToken, profile, done) => {
 
@@ -60,7 +60,7 @@ passport.use(
     {
       consumerKey: keys.twitterConsumerKey,
       consumerSecret: keys.twitterConsumerSecret,
-      callbackURL: keys.twitterCallbackURL,
+      callbackURL: "/auth/twitter/callback",
       includeEmail: true,
       proxy: true
     },
@@ -93,7 +93,7 @@ passport.use(
     {
       clientID: keys.gitHubClientID,
       clientSecret: keys.gitHubClientSecret,
-      callbackURL: keys.gitHubCallbackURL,
+      callbackURL: "/auth/github/callback",
       proxy: true,
       scope: ['user:email'],
     },

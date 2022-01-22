@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "Buy your plants from Krause Co. Website created by Tim Krause at TimKrause.dev",
   "main": "index.js",
+  "engines": {
+    "node": "15.5.0",
+    "npm": "7.20.5"
+  },
   "scripts": {
     "start": "node index.js",
     "server": "nodemon index.js",
