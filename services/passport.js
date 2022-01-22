@@ -24,7 +24,8 @@ passport.use(
     {
       clientID: keys.googleClientID,
       clientSecret: keys.googleClientSecret,
-      callbackURL: "https://krause-co.herokuapp.com/auth/google/callback",
+      callbackURL: keys.googleCallbackURL,
+      proxy: true
     },
     async (accessToken, refreshToken, profile, done) => {
 
@@ -59,9 +60,9 @@ passport.use(
     {
       consumerKey: keys.twitterConsumerKey,
       consumerSecret: keys.twitterConsumerSecret,
-      callbackURL: "/auth/twitter/callback",
-      proxy: true,
-      includeEmail: true
+      callbackURL: keys.twitterCallbackURL,
+      includeEmail: true,
+      proxy: true
     },
     async (accessToken, refreshToken, profile, done) => {
       const existingUser = await User.findOne({provider: profile.provider, provider_id: profile.id });
@@ -92,7 +93,8 @@ passport.use(
     {
       clientID: keys.gitHubClientID,
       clientSecret: keys.gitHubClientSecret,
-      callbackURL: "https://krause-co.herokuapp.com/auth/github/callback",
+      callbackURL: keys.gitHubCallbackURL,
+      proxy: true,
       scope: ['user:email'],
     },
     async (accessToken, refreshToken, profile, done) => {
