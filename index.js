@@ -25,20 +25,6 @@ app.use(passport.session());
 require("./routes/authRoutes")(app);
 
 
-
-
-
-
-
-app.get('/', (req, res) => {
-  res.send('Hello World!')
-})
-
-app.get('/login', (req, res) => {
-  res.send('Login!')
-})
-
-
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 

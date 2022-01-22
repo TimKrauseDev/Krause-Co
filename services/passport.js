@@ -24,8 +24,7 @@ passport.use(
     {
       clientID: keys.googleClientID,
       clientSecret: keys.googleClientSecret,
-      callbackURL: "/auth/google/callback",
-      proxy: true,
+      callbackURL: "https://krause-co.herokuapp.com/auth/google/callback",
     },
     async (accessToken, refreshToken, profile, done) => {
 
@@ -33,7 +32,7 @@ passport.use(
 
       const existingUser = await User.findOne({provider: profile.provider, provider_id: profile.id });
 
-      console.log(existingUSer);
+      console.log(existingUser);
 
       if (existingUser) {
         return done(null, existingUser);
@@ -98,6 +97,8 @@ passport.use(
       proxy: true,
     },
     async (accessToken, refreshToken, profile, done) => {
+
+      console.log(profile)
       const existingUser = await User.findOne({provider: profile.provider, provider_id: profile.id });
       
       if (existingUser) {
