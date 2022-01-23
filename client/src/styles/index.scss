@@ -1,0 +1,15 @@
+@import "~bootstrap/scss/bootstrap";
+
+html {
+  -webkit-tap-highlight-color: transparent;
+}
+
+#login {
+  background-image: url(../../imgs/tomatoe.jpg);
+  background-position: center;
+  background-size: cover;
+}
+
+#login .login-inner {
+  background-image: url(../../imgs/tomatoe_texture.jpg);
+}
