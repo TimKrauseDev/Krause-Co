@@ -15,7 +15,13 @@ View the live version [Here](https://krause-co.herokuapp.com/).
 
 
 ## Technology Used
-- React
+- Node.js
+- Express
+- MongoDB
+- Mongoose
 - Passport
+- React
+- Bootstrap
+- Axios
 
 ## Directory 
