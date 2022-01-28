@@ -1,73 +1,134 @@
+/* eslint-disable default-case */
 import React from "react";
-import { LinkContainer } from "react-router-bootstrap";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 
-import {
-  Navbar,
-  Nav,
-  Container,
-  NavDropdown,
-  Form,
-  FormControl,
-  Button,
-} from "react-bootstrap";
-
-const Header = () => {
-  return (
-    <header id="Header">
-      <Navbar collapseOnSelect expand="md" bg="dark" variant="dark">
-        <Container>
-          <LinkContainer to="/">
-            <Navbar.Brand href="#home">Krause Co</Navbar.Brand>
-          </LinkContainer>
-          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-          <Navbar.Collapse id="responsive-navbar-nav">
-            <Nav className="me-auto">
-              <NavDropdown
-                title="Shop"
-                id="collasible-nav-dropdown"
-                menuVariant="dark"
-                active="false"
+export const Header = ({ auth }) => {
+  const renderLogin = () => {
+    switch (auth) {
+      case null:
+        return;
+      case false:
+        return (
+          <ul className="navbar-nav mx-3">
+            <li className="nav-item ">
+              <Link
+                className="nav-item btn btn-outline-dark"
+                aria-current="page"
+                to="/login"
               >
-                <LinkContainer to="/shop">
-                  <NavDropdown.Item>All</NavDropdown.Item>
-                </LinkContainer>
-                <LinkContainer to="/shop/1">
-                  <NavDropdown.Item>Fruits</NavDropdown.Item>
-                </LinkContainer>
-                <LinkContainer to="/shop/2">
-                  <NavDropdown.Item>Herbs</NavDropdown.Item>
-                </LinkContainer>
-                <LinkContainer to="/shop/3">
-                  <NavDropdown.Item>Flowers</NavDropdown.Item>
-                </LinkContainer>
-                <LinkContainer to="/shop/4">
-                  <NavDropdown.Item>Cover Crops</NavDropdown.Item>
-                </LinkContainer>
-                <LinkContainer to="/shop/5">
-                  <NavDropdown.Item>Vegetables</NavDropdown.Item>
-                </LinkContainer>
-              </NavDropdown>
-            </Nav>
-            <Nav>
-              <Form className="d-flex">
-                <FormControl
-                  type="search"
-                  placeholder="Search"
-                  className="me-2"
-                  aria-label="Search"
+                Login
+              </Link>
+            </li>
+          </ul>
+        );
+      default:
+        return (
+          <ul className="navbar-nav mx-3">
+            <li className="nav-item ">
+              <Link className="nav-item" aria-current="page" to="/account">
+                <img
+                  src={auth.photos}
+                  alt="profile"
+                  className="profile-picture"
+                  style={{ border: "2px solid #222" }}
                 />
-                <Button variant="outline-success">Search</Button>
-              </Form>
-              <LinkContainer to="/login">
-                <Nav.Link>Login</Nav.Link>
-              </LinkContainer>
-              <Nav.Link href="/">Cart</Nav.Link>
-            </Nav>
-          </Navbar.Collapse>
-        </Container>
-      </Navbar>
+              </Link>
+            </li>
+          </ul>
+        );
+    }
+  };
+
+  return (
+    <header id="Header" className="">
+      <nav className="navbar navbar-expand-lg navbar-light bg-light border-bottom border-2 border-dark">
+        <div className="container px-4 px-lg-5">
+          <Link className="navbar-brand" to="/">
+            Krause Co
+          </Link>
+          <button
+            className="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span className="navbar-toggler-icon"></span>
+          </button>
+          <div className="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul className="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+              <li className="nav-item">
+                <Link className="nav-link active" aria-current="page" to="/">
+                  Home
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" to="/about">
+                  About
+                </Link>
+              </li>
+              <li className="nav-item dropdown">
+                <Link
+                  to="/shop"
+                  id="nav-barDropdown"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                  className="nav-link dropdown-toggle"
+                >
+                  Shop
+                </Link>
+                <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <li>
+                    <Link className="dropdown-item" to="/shop">
+                      All Seeds
+                    </Link>
+                  </li>
+                  <li>
+                    <Link className="dropdown-item" to="/shop/flower">
+                      Flower
+                    </Link>
+                  </li>
+                  <li>
+                    <Link className="dropdown-item" to="/shop/fruit">
+                      Fruits
+                    </Link>
+                  </li>
+                  <li>
+                    <Link className="dropdown-item" to="/shop/herb">
+                      Herbs
+                    </Link>
+                  </li>
+                  <li>
+                    <Link className="dropdown-item" to="/shop/vegetable">
+                      Vegetables
+                    </Link>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+            {renderLogin()}
+            <form className="d-flex">
+              <button className="btn btn-outline-dark" type="submit">
+                <i className="fa fa-shopping-cart me-1"></i>
+                Cart
+                <span className="badge bg-dark text-white ms-1 rounded-pill">
+                  0
+                </span>
+              </button>
+            </form>
+          </div>
+        </div>
+      </nav>
     </header>
   );
 };
 
-export default Header;
+const mapStateToProps = ({ auth }) => {
+  return { auth };
+};
+
+export default connect(mapStateToProps, {})(Header);

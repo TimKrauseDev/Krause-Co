@@ -4,12 +4,45 @@ html {
   -webkit-tap-highlight-color: transparent;
 }
 
+#login,
+#landing {
+  height: calc(100vh - 58px);
+}
+
 #login {
-  background-image: url(../../imgs/tomatoe.jpg);
+  background-image: url(../imgs/tomatoe.jpg);
+  background-position: center;
+  background-size: cover;
+}
+
+#landing {
+  background-image: url(../imgs/plants_aligned.jpg);
   background-position: center;
   background-size: cover;
 }
 
 #login .login-inner {
-  background-image: url(../../imgs/tomatoe_texture.jpg);
+  background-image: url(../imgs/tomatoe_texture.jpg);
+}
+
+#Header .profile-picture {
+  height: 40px;
+  border-radius: 50%;
+}
+
+@media (max-width: 767px) {
+  #login,
+  #landing {
+    height: calc(100vh - 56px);
+  }
+}
+
+.container {
+  max-width: none !important;
+}
+
+.grid {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
 }
