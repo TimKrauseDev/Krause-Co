@@ -3,7 +3,24 @@ import { connect } from "react-redux";
 import { useParams } from "react-router-dom";
 import * as actions from "../../actions";
 
-const Product = ({ fetchProductBySlug, prod }) => {
+const validateProductCount = (el, inv, setProductCount) => {
+  const num = parseInt(el.target.value);
+  if (num > inv) {
+    setProductCount(inv);
+  } else if (num < 0) {
+    setProductCount(0);
+  } else {
+    setProductCount(parseInt(el.target.value) || 0);
+  }
+};
+
+const Product = ({
+  fetchProductBySlug,
+  addProductToShoppingSession,
+  prod,
+  auth,
+  shoppingSession,
+}) => {
   const slug = useParams().slug || "No Product";
   const [productCount, setProductCount] = useState(1);
 
@@ -11,9 +28,29 @@ const Product = ({ fetchProductBySlug, prod }) => {
     fetchProductBySlug(slug);
   }, [fetchProductBySlug, slug]);
 
+  const addToShoppingSession = (productCount, product) => {
+    if (!productCount) return;
+
+    /**
+     * TODO:
+     * - Add validation to make sure item isn't already in Cart
+     * - If item is in cart, increase the quantity of item that is already in cart.
+     */
+    const productData = {
+      product_id: product._id,
+      product_name: product.name,
+      image: product.img,
+      quantity: productCount,
+      subtotal: productCount * product.price,
+    };
+
+    addProductToShoppingSession(shoppingSession.user_id, productData);
+  };
+
   return (
-    prod && (
-      <section id="product" className="py-5">
+    <section id="product" className="py-5">
+      {!prod && <h2 className="text-center">No Product</h2>}
+      {prod && (
         <div className="container-xl px-4 px-lg-5 my-5">
           <div className="row gx-4 gx-lg-5 align-items-center">
             <div className="col-md-6">
@@ -32,22 +69,22 @@ const Product = ({ fetchProductBySlug, prod }) => {
                 <span>{`$ ${prod.price.toFixed(2)}`}</span>
               </div>
               <p className="lead">{prod.description}</p>
-              <div class="row my-3">
-                <div class="col">
+              <div className="row my-3">
+                <div className="col">
                   <p>
                     <span className="fw-bold">Botanical Name: </span>
-                    {prod.botanical_name}
+                    {prod.botanical_name || "N/A"}
                   </p>
                 </div>
               </div>
-              <div class="row my-3">
-                <div class="col">
+              <div className="row my-3">
+                <div className="col">
                   <p>
                     <span className="fw-bold">Seeds Per Packet: </span>
-                    {prod.seeds_per_packet}
+                    {prod.seeds_per_packet || "N/A"}
                   </p>
                 </div>
-                <div class="col">
+                <div className="col">
                   <p>
                     <span className="fw-bold">Zones: </span>
                     {prod.zones.map((zone, idx, arr) => {
@@ -60,35 +97,38 @@ const Product = ({ fetchProductBySlug, prod }) => {
                   </p>
                 </div>
               </div>
-              <div class="row my-3">
-                <div class="col">
+              <div className="row my-3">
+                <div className="col">
                   <p>
                     <span className="fw-bold">Sun: </span>
-                    {prod.seeds_per_packet}
+                    {prod.sun || "N/A"}
                   </p>
                 </div>
-                <div class="col">
+                <div className="col">
                   <p>
                     <span className="fw-bold">Fruit Color: </span>
-                    {prod.seeds_per_packet}
+                    {prod.fruit_color || "N/A"}
                   </p>
                 </div>
               </div>
-              <div className="small mb-1 text-capitalize text-muted">
-                Quantity
-              </div>
+              <div className="small mb-1 text-capitalize fw-bold">Quantity</div>
 
               <div className="d-flex">
                 <input
                   className="form-control text-center me-3 w-auto"
                   id="inputQuantity"
-                  type="num"
+                  type="number"
                   value={productCount}
-                  onChange={(e) => setProductCount(e.target.value)}
+                  min="0"
+                  max={prod.inventory}
+                  onChange={(e) =>
+                    validateProductCount(e, prod.inventory, setProductCount)
+                  }
                 />
                 <button
                   className="btn btn-outline-dark flex-shrink-0"
                   type="button"
+                  onClick={() => addToShoppingSession(productCount, prod)}
                 >
                   <i className="fa fa-shopping-cart me-1"></i>
                   Add to cart
@@ -97,13 +137,13 @@ const Product = ({ fetchProductBySlug, prod }) => {
             </div>
           </div>
         </div>
-      </section>
-    )
+      )}
+    </section>
   );
 };
 
-const mapStateToProps = ({ prod }) => {
-  return { prod };
+const mapStateToProps = ({ prod, auth, shoppingSession }) => {
+  return { prod, auth, shoppingSession };
 };
 
 export default connect(mapStateToProps, actions)(Product);

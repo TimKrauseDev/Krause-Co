@@ -3,20 +3,23 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { connect } from "react-redux";
 import * as actions from "../actions";
 
-import Header from "./Header";
+import Header from "./Header/Header";
 import Login from "./account/Login";
 import Landing from "./Landing";
 import Shop from "./shop/Shop";
 import Product from "./product/Product";
 const Account = () => (
-  <div>Account/Settings; Account/Logout; Account/Orders</div>
+  <div>
+    Account/Settings; Account/Logout; Account/Orders
+    <a href="/api/logout">LOGOUT</a>
+  </div>
 );
 const About = () => <div>About</div>;
 const Checkout = () => <div>Checkout</div>;
 
-const App = ({ fetchUser }) => {
+const App = ({ fetchUserAndShoppingSession }) => {
   useEffect(() => {
-    fetchUser();
+    fetchUserAndShoppingSession();
   });
 
   return (

@@ -3,6 +3,8 @@ import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
+import ShoppingCartDropdown from "./ShoppingCartDropdown";
+
 export const Header = ({ auth }) => {
   const renderLogin = () => {
     switch (auth) {
@@ -113,8 +115,8 @@ export const Header = ({ auth }) => {
             {renderLogin()}
             <form className="d-flex">
               <button className="btn btn-outline-dark" type="submit">
-                <i className="fa fa-shopping-cart me-1"></i>
-                Cart
+                <i className="fa fa-shopping-basket me-1"></i>
+                Basket
                 <span className="badge bg-dark text-white ms-1 rounded-pill">
                   0
                 </span>
@@ -123,6 +125,7 @@ export const Header = ({ auth }) => {
           </div>
         </div>
       </nav>
+      <ShoppingCartDropdown />
     </header>
   );
 };
@@ -131,4 +134,4 @@ const mapStateToProps = ({ auth }) => {
   return { auth };
 };
 
-export default connect(mapStateToProps, {})(Header);
+export default connect(mapStateToProps, null)(Header);
