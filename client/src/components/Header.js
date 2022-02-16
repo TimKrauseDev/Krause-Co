@@ -3,7 +3,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
-import ShoppingCartDropdown from "./header/ShoppingCartDropdown";
+import ShoppingCartDropdown from "./ShoppingCartDropdown";
 
 export const Header = ({ auth, shoppingSession }) => {
   const renderLogin = () => {
