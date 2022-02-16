@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 import ShoppingCartDropdown from "./ShoppingCartDropdown";
 
-export const Header = ({ auth }) => {
+export const Header = ({ auth, shoppingSession }) => {
   const renderLogin = () => {
     switch (auth) {
       case null:
@@ -113,15 +113,17 @@ export const Header = ({ auth }) => {
               </li>
             </ul>
             {renderLogin()}
-            <form className="d-flex">
-              <button className="btn btn-outline-dark" type="submit">
-                <i className="fa fa-shopping-basket me-1"></i>
-                Basket
-                <span className="badge bg-dark text-white ms-1 rounded-pill">
-                  0
-                </span>
-              </button>
-            </form>
+            <Link to="/cart">
+              <form className="d-flex">
+                <button className="btn btn-outline-dark" type="submit">
+                  <i className="fa fa-shopping-basket me-1"></i>
+                  Basket
+                  <span className="badge bg-dark text-white ms-1 rounded-pill">
+                    {shoppingSession ? shoppingSession.products.length : 0}
+                  </span>
+                </button>
+              </form>
+            </Link>
           </div>
         </div>
       </nav>
@@ -130,8 +132,8 @@ export const Header = ({ auth }) => {
   );
 };
 
-const mapStateToProps = ({ auth }) => {
-  return { auth };
+const mapStateToProps = ({ auth, shoppingSession }) => {
+  return { auth, shoppingSession };
 };
 
 export default connect(mapStateToProps, null)(Header);

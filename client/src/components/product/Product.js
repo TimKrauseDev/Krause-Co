@@ -42,6 +42,7 @@ const Product = ({
       image: product.img,
       quantity: productCount,
       subtotal: productCount * product.price,
+      productInventory: product.inventory,
     };
 
     addProductToShoppingSession(shoppingSession.user_id, productData);

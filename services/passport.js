@@ -1,7 +1,7 @@
 const passport = require("passport");
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
-const TwitterStrategy = require('passport-twitter').Strategy;
-const GitHubStrategy = require('passport-github2').Strategy;
+const TwitterStrategy = require("passport-twitter").Strategy;
+const GitHubStrategy = require("passport-github2").Strategy;
 const mongoose = require("mongoose");
 const keys = require("../config/keys");
 
@@ -17,7 +17,6 @@ passport.deserializeUser((id, done) => {
   });
 });
 
-
 // Google Strategy
 passport.use(
   new GoogleStrategy(
@@ -28,23 +27,25 @@ passport.use(
       proxy: true,
     },
     async (accessToken, refreshToken, profile, done) => {
-
-      const existingUser = await User.findOne({provider: profile.provider, provider_id: profile.id });
+      const existingUser = await User.findOne({
+        provider: profile.provider,
+        provider_id: profile.id,
+      });
 
       if (existingUser) {
         return done(null, existingUser);
       }
 
       const user = await new User({
-        provider: profile.provider, 
-        provider_id: profile.id, 
+        provider: profile.provider,
+        provider_id: profile.id,
         display_name: profile.displayName,
         first_name: profile.firstName,
         last_name: profile.lastName,
         email: profile.emails[0].value,
-        photos: profile.photos[0].value
+        photos: profile.photos[0].value,
       }).save();
-      
+
       done(null, user);
     }
   )
@@ -58,28 +59,30 @@ passport.use(
       consumerSecret: keys.twitterConsumerSecret,
       callbackURL: "/auth/twitter/callback",
       includeEmail: true,
-      proxy: true
+      proxy: true,
     },
     async (accessToken, refreshToken, profile, done) => {
-      const existingUser = await User.findOne({provider: profile.provider, provider_id: profile.id });
-     
+      const existingUser = await User.findOne({
+        provider: profile.provider,
+        provider_id: profile.id,
+      });
+
       if (existingUser) {
         return done(null, existingUser);
       }
 
-       const user = await new User({
-        provider: profile.provider, 
-        provider_id: profile.id, 
+      const user = await new User({
+        provider: profile.provider,
+        provider_id: profile.id,
         display_name: profile.displayName,
         email: profile.emails[0].value,
-        photos: profile.photos[0].value
+        photos: profile.photos[0].value,
       }).save();
-      
+
       done(null, user);
     }
   )
 );
-
 
 // Github Strategy
 passport.use(
@@ -92,21 +95,23 @@ passport.use(
       scope: ["user:email"],
     },
     async (accessToken, refreshToken, profile, done) => {
+      const existingUser = await User.findOne({
+        provider: profile.provider,
+        provider_id: profile.id,
+      });
 
-      const existingUser = await User.findOne({provider: profile.provider, provider_id: profile.id });
-      
       if (existingUser) {
-         return done(null, existingUser);
+        return done(null, existingUser);
       }
 
       const user = await new User({
-        provider: profile.provider, 
-        provider_id: profile.id, 
+        provider: profile.provider,
+        provider_id: profile.id,
         display_name: profile.displayName,
         email: profile.emails[0].value,
-        photos: profile.photos[0].value
+        photos: profile.photos[0].value,
       }).save();
-      
+
       done(null, user);
     }
   )

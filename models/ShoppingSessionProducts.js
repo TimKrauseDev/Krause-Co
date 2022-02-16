@@ -7,6 +7,7 @@ const shoppingSessionProductSubSchema = new Schema({
   image: String,
   quantity: Number,
   subtotal: Number,
+  productInventory: Number,
 });
 
 module.exports = shoppingSessionProductSubSchema;

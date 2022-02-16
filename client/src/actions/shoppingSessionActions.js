@@ -1,5 +1,9 @@
 import axios from "axios";
-import { PUT_ADD_PRODUCT, PUT_REMOVE_PRODUCT } from "./types";
+import {
+  PUT_ADD_PRODUCT,
+  PUT_REMOVE_PRODUCT,
+  PUT_UPDATE_PRODUCT,
+} from "./types";
 
 // PUT ADD PRODUCT TO SHOPPING CART
 export const addProductToShoppingSession =
@@ -14,10 +18,29 @@ export const addProductToShoppingSession =
 
 // PUT REMOVE PRODUCT TO SHOPPING CART
 export const removeProductFromShoppingSession =
-  (product) => async (dispatch) => {
-    console.log(product);
+  (userID, productID) => async (dispatch) => {
+    const res = await axios.put(
+      `/api/shoppingsession/removeitem/${userID}`,
+      productID
+    );
 
     dispatch({
       type: PUT_REMOVE_PRODUCT,
+      payload: res.data,
+    });
+  };
+
+// PUT UPDATE PRODUCT QUANTITY
+export const updateProductQuantity =
+  (userID, productUpdate) => async (dispatch) => {
+    console.log("update", productUpdate);
+    const res = await axios.put(
+      `/api/shoppingsession/updatequantity/${userID}`,
+      productUpdate
+    );
+
+    dispatch({
+      type: PUT_UPDATE_PRODUCT,
+      payload: res.data,
     });
   };

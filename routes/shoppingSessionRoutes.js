@@ -48,7 +48,39 @@ router.put("/shoppingsession/removeitem/:userid", async (req, res) => {
 
   session.total -= session.products.id(req.body._id).subtotal;
 
+  if (session.total < 0) {
+    session.total = 0;
+  }
+
   session.products.id(req.body._id).remove();
+  session.save();
+
+  res.send(session);
+});
+
+// PATCH UPDATE PRODUCT QUANTITY
+router.put("/shoppingsession/updatequantity/:userid", async (req, res) => {
+  const { userid } = req.params;
+  const { _id, new_qty } = req.body;
+
+  const session = await ShoppingSession.findOne({ user_id: userid });
+  const product = session.products.id(_id);
+
+  if (!product) {
+    res.send("Product not found");
+    return;
+  }
+
+  session.total -= product.subtotal;
+
+  const productPrice = product.subtotal / product.quantity;
+  const newSubtotal = new_qty * productPrice;
+
+  product.subtotal = newSubtotal;
+  product.quantity = new_qty;
+
+  session.total += product.subtotal;
+
   session.save();
 
   res.send(session);
