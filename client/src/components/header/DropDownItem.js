@@ -4,7 +4,10 @@ const DropDownItem = ({ product }) => {
   return (
     <li className="shopping-cart-item">
       <div className="image-container">
-        <img src={require(`../imgs/products/${product.image}`)} alt="item1" />
+        <img
+          src={require(`../../imgs/products/${product.image}`)}
+          alt="item1"
+        />
       </div>
       <div className="item-content">
         <div className="item-name font-weight-bold">
