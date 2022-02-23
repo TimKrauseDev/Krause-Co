@@ -8,7 +8,8 @@ import Login from "./account/Login";
 import Landing from "./Landing";
 import Shop from "./shop/Shop";
 import Product from "./product/Product";
-import Cart from "./account/Cart";
+import Cart from "./cart/Cart";
+import ThankYouPage from "./cart/ThankYouPage";
 import Checkout from "./account/Checkout";
 const Account = () => (
   <div>
@@ -35,6 +36,7 @@ const App = ({ fetchUserAndShoppingSession }) => {
         <Route path="/shop" element={<Shop />} />
         <Route path="/product/:slug" element={<Product />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/thank-you" element={<ThankYouPage />} />
         <Route path="/checkout" element={<Checkout />} />
       </Routes>
     </BrowserRouter>

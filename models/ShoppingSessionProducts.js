@@ -4,6 +4,7 @@ const { Schema } = mongoose;
 const shoppingSessionProductSubSchema = new Schema({
   product_id: String,
   product_name: String,
+  stripePriceID: String,
   image: String,
   quantity: Number,
   subtotal: Number,

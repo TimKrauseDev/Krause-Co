@@ -43,6 +43,7 @@ const Product = ({
       quantity: productCount,
       subtotal: productCount * product.price,
       productInventory: product.inventory,
+      stripePriceID: product.stripePriceID,
     };
 
     addProductToShoppingSession(shoppingSession.user_id, productData);

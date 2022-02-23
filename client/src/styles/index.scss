@@ -385,3 +385,25 @@ html {
 .cart-item .remove-product {
   cursor: pointer;
 }
+
+.empty-cart {
+  height: calc(100vh - 70px);
+  max-width: 600px;
+  margin: auto;
+
+  .icon-background {
+    border: 1px solid #000;
+    width: 100px;
+    height: 100px;
+    margin: 10px auto;
+    background: #ddd;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+  }
+
+  .fa-shopping-basket {
+    font-size: 30px;
+  }
+}

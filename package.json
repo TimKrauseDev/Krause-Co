@@ -24,6 +24,7 @@
   },
   "homepage": "https://github.com/TimKrauseUS/Krause-Co#readme",
   "dependencies": {
+    "axios": "^0.26.0",
     "bootstrap-icons": "^1.7.2",
     "concurrently": "^7.0.0",
     "cookie-session": "^2.0.0",
@@ -33,6 +34,7 @@
     "passport": "^0.5.2",
     "passport-github2": "^0.1.12",
     "passport-google-oauth20": "^2.0.0",
-    "passport-twitter": "^1.0.4"
+    "passport-twitter": "^1.0.4",
+    "stripe": "^8.203.0"
   }
 }

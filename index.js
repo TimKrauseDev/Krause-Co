@@ -4,10 +4,12 @@ const PORT = process.env.PORT || 5000;
 const cookieSession = require("cookie-session");
 const passport = require("passport");
 const keys = require("./config/keys");
+const stripe = require("stripe")(keys.stripeSecret);
 require("./models/User");
 require("./models/Product");
 require("./services/passport");
 require("./models/ShoppingSession");
+require("./models/orderHistory");
 
 mongoose.connect(keys.mongoURI);
 
@@ -33,6 +35,7 @@ app.use(function (err, req, res, next) {
 
 require("./routes/authRoutes")(app);
 require("./routes/productRoutes")(app);
+require("./routes/checkoutRoutes")(app);
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));

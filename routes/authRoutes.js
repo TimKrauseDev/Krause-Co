@@ -1,9 +1,7 @@
 const passport = require("passport");
 
 module.exports = (app) => {
-  /////
   // GOOGLE
-  /////
 
   //initial login
   app.get(
@@ -24,9 +22,7 @@ module.exports = (app) => {
     }
   );
 
-  /////
   // TWITTER
-  /////
 
   //initial login
   app.get("/auth/twitter", passport.authenticate("twitter"));
@@ -42,9 +38,7 @@ module.exports = (app) => {
     }
   );
 
-  /////
   // GITHUB
-  /////
 
   //initial login
   app.get("/auth/github", passport.authenticate("github"));
@@ -60,9 +54,7 @@ module.exports = (app) => {
     }
   );
 
-  /////
   // TESTS
-  /////
 
   // logout
   app.get("/api/logout", (req, res) => {

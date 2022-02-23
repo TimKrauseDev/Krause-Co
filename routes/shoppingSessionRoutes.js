@@ -12,39 +12,47 @@ router.get("/shoppingsession", async (req, res) => {
 });
 
 // GET ONE SHOPPING SESSION
-router.get("/shoppingsession/:userid", async (req, res) => {
-  const session = await ShoppingSession.find({ user_id: req.params.userid });
+router.get("/shoppingsession/:user_id", async (req, res) => {
+  const { user_id } = req.params;
+
+  const session = await ShoppingSession.find({ user_id });
 
   res.send(session);
 });
 
 // POST NEW SHOPPING SESSION
 router.post("/shoppingsession", async (req, res) => {
+  const { user_id, email } = req.body;
+
   const session = await ShoppingSession.create({
-    user_id: req.body.user_id,
-    email: req.body.email,
+    user_id,
+    email,
   });
 
   res.send(session);
 });
 
 // PUT ADD ITEM TO SHOPPING SESSION
-router.put("/shoppingsession/additem/:userid", async (req, res) => {
-  const session = await ShoppingSession.findOne({ user_id: req.params.userid });
+router.put("/shoppingsession/additem/:user_id", async (req, res) => {
+  const { user_id } = req.params;
+  const { subtotal } = req.body;
+  const product = req.body;
 
-  const newTotal = session.total + req.body.subtotal;
-  const newProducts = [...session.products, req.body];
+  const session = await ShoppingSession.findOne({ user_id });
 
-  session.products = newProducts;
-  session.total = newTotal;
+  session.total = session.total + subtotal;
+  session.products = [...session.products, product];
 
   session.save();
+
   res.send(session);
 });
 
 // PUT REMOVE ITEM FROM SHOPPING SESSION
-router.put("/shoppingsession/removeitem/:userid", async (req, res) => {
-  const session = await ShoppingSession.findOne({ user_id: req.params.userid });
+router.put("/shoppingsession/removeitem/:user_id", async (req, res) => {
+  const { user_id } = req.params;
+
+  const session = await ShoppingSession.findOne({ user_id });
 
   session.total -= session.products.id(req.body._id).subtotal;
 
@@ -59,11 +67,11 @@ router.put("/shoppingsession/removeitem/:userid", async (req, res) => {
 });
 
 // PATCH UPDATE PRODUCT QUANTITY
-router.put("/shoppingsession/updatequantity/:userid", async (req, res) => {
-  const { userid } = req.params;
+router.put("/shoppingsession/updatequantity/:user_id", async (req, res) => {
+  const { user_id } = req.params;
   const { _id, new_qty } = req.body;
 
-  const session = await ShoppingSession.findOne({ user_id: userid });
+  const session = await ShoppingSession.findOne({ user_id });
   const product = session.products.id(_id);
 
   if (!product) {

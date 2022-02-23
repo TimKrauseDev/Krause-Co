@@ -10,6 +10,7 @@ module.exports = {
   gitHubClientSecret: process.env.GITHUB_CLIENT_SECRET,
   cookieKey: process.env.COOKIE_KEY,
   mongoURI: process.env.MONGO_URI,
-}
-
-
+  stripeKey: process.env.STRIPE_KEY,
+  stripeSecret: process.env.STRIPE_SECRET,
+  domain: process.env.DOMAIN,
+};
