@@ -6,18 +6,13 @@ import * as actions from "../actions";
 import Header from "./header/Header";
 import Login from "./account/Login";
 import Landing from "./Landing";
+import About from "./about/About";
 import Shop from "./shop/Shop";
 import Product from "./product/Product";
 import Cart from "./cart/Cart";
 import ThankYouPage from "./cart/ThankYouPage";
 import Checkout from "./account/Checkout";
-const Account = () => (
-  <div>
-    Account/Settings; Account/Logout; Account/Orders
-    <a href="/api/logout">LOGOUT</a>
-  </div>
-);
-const About = () => <div>About</div>;
+import Account from "./account/Account";
 
 const App = ({ fetchUserAndShoppingSession }) => {
   useEffect(() => {

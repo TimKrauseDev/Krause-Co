@@ -14,7 +14,17 @@ const Shop = ({ fetchProducts, prod }) => {
 
   return (
     <section id="shop">
-      <h1 className="text-center pt-5">{category || "All Products"} </h1>
+      <header
+        className={`masthead text-center text-white ${category || "allSeed"}`}
+      >
+        <div className="masthead-content">
+          <div className="container px-5">
+            <h1 className="masthead-heading mb-0 text-capitalize">
+              {category || "All Seed"}s.
+            </h1>
+          </div>
+        </div>
+      </header>
       {prod && <ProductGrid products={prod} />}
     </section>
   );

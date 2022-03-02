@@ -7,8 +7,10 @@ const Landing = () => {
       id="landing"
       className="d-flex mx-auto justify-content-center align-items-center"
     >
-      <div className="landing-content-wrapper border p-4 bg-white rounded-3">
-        <p className="fs-1">Wecome to Krause Co!</p>
+      <div className="landing-content-wrapper p-4 rounded-3">
+        <h1 className="masthead-heading text-light mb-4">
+          Your favorite place to buy quality seeds!
+        </h1>
         <LinkContainer to="/shop" className="mx-auto">
           <button
             type="button"
