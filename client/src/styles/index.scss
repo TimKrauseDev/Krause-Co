@@ -1,62 +1,67 @@
 @import "~bootstrap/scss/bootstrap";
+@import url("https://fonts.googleapis.com/css2?family=Oswald");
+
+$green: #5e704a;
+$green-hover: #619b1f;
 
 *,
 *:before,
 *:after {
   box-sizing: border-box;
+  box-shadow: none !important;
 }
 
 html {
   -webkit-tap-highlight-color: transparent;
 }
 
+body {
+  font-family: "Oswald", sans-serif !important;
+}
+
 #login,
-#landing {
-  height: calc(100vh - 58px);
+#landing,
+#shop,
+#product,
+#account {
+  min-height: calc(100vh - 58px - 154px) !important;
 }
 
-#login {
-  background-image: url(../imgs/tomatoe.jpg);
-  background-position: center;
-  background-size: cover;
+#shop,
+#product {
+  .btn {
+    background: $green;
+    color: #fff;
+    border: 2px solid $green;
+  }
+  .btn:hover {
+    background: #fff;
+    color: $green;
+  }
 }
 
-#landing {
-  background: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
-    url(../imgs/plants_aligned.jpg);
-  background-position: center;
-  background-size: cover;
-}
-
-#login .login-inner {
-  background-image: url(../imgs/tomatoe_texture.jpg);
-}
+/* HEADER */
 
 #Header .profile-picture {
   height: 40px;
   border-radius: 50%;
+  border: 2px solid #222;
 }
 
-@media (max-width: 767px) {
-  #login,
-  #landing {
-    height: calc(100vh - 56px);
-  }
-}
-
-.container {
-  max-width: none !important;
-}
-
-.grid {
-  max-width: 1200px;
-  margin-left: auto;
-  margin-right: auto;
+#Header .basket-mobile {
+  display: none;
 }
 
 // Cart Dropdown
 
 #Header {
+  .basket-desktop {
+    opacity: 0.8;
+    transition: all ease-in-out 0.2s;
+  }
+  .basket-desktop:hover {
+    opacity: 1;
+  }
   .badge {
     border-radius: 10px;
     color: white;
@@ -70,7 +75,6 @@ html {
   }
 
   .shopping-cart {
-    display: none;
     margin: 15px 0;
     float: right;
     right: 0;
@@ -80,10 +84,6 @@ html {
     border-radius: 3px;
     padding: 20px;
     z-index: 1;
-
-    .seemore {
-      padding-left: 5px;
-    }
 
     li {
       list-style: none;
@@ -143,16 +143,25 @@ html {
       display: flex;
       flex-direction: row;
       grid-gap: 20px;
+    }
 
-      .button {
-        width: 100%;
-      }
+    .btn {
+      width: 100%;
+      background: $green;
+      border: 2px solid $green;
+      color: #fff;
+      transition: all ease-in-out 0.2s;
+    }
+
+    .btn:hover {
+      background: #fff;
+      color: $green;
     }
   }
 
   .shopping-cart:after {
     bottom: 100%;
-    left: 89%;
+    left: 65%;
     border: solid transparent;
     content: " ";
     height: 0;
@@ -165,7 +174,6 @@ html {
   }
 
   .cart-icon {
-    //color: #515783;
     font-size: 24px;
     margin-right: 7px;
     float: left;
@@ -184,6 +192,185 @@ html {
 }
 
 // END Cart Dropdown
+
+@media only screen and (max-width: 768px),
+  only screen and (max-device-width: 768px) {
+  #Header .basket-desktop {
+    display: none !important;
+  }
+
+  #Header .basket-mobile {
+    display: inline-block;
+  }
+
+  #Header .navbar-nav {
+    margin-left: 0;
+  }
+
+  #Header .shopping-cart {
+    display: none;
+  }
+}
+
+/* FOOTER */
+#Footer {
+  background: $green;
+  color: #fff;
+  border-top: 2px solid #222;
+}
+
+#Footer {
+  a {
+    color: #fff;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-color: transparent;
+    transition: all ease-in-out 0.2s;
+  }
+  a:hover {
+    text-decoration-color: #fff;
+  }
+}
+
+/* LANDING PAGE */
+
+#landing {
+  .btn {
+    background: $green;
+    color: #fff;
+    padding: 13px 26px;
+  }
+}
+
+#landing {
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
+    url(../imgs/plants_aligned.jpg);
+  background-position: center;
+  background-size: cover;
+}
+
+/* ABOUT PAGE */
+#about .about-section {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+header.masthead .masthead-content {
+  z-index: 1;
+  position: relative;
+}
+.masthead-heading {
+  font-size: 4rem;
+  margin: auto;
+  text-align: center;
+}
+header.masthead .masthead-content .masthead-subheading {
+  font-size: 2rem;
+}
+
+@media (min-width: 992px) {
+  header.masthead {
+    padding-top: 10rem;
+    padding-bottom: 10rem;
+  }
+  header.masthead .masthead-content .masthead-heading {
+    font-size: 6rem;
+  }
+  header.masthead .masthead-content .masthead-subheading {
+    font-size: 4rem;
+  }
+}
+
+header.masthead {
+  position: relative;
+  overflow: hidden;
+  padding-top: calc(7rem + 72px);
+  padding-bottom: 7rem;
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
+    url(../imgs/about/about-lettuce.jpg);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: scroll;
+  background-size: cover;
+}
+
+/* SHOP PAGE */
+header.allSeed {
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
+    url(../imgs/product_page/allseed.jpg);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: scroll;
+  background-size: cover;
+}
+
+header.flower {
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
+    url(../imgs/product_page/flower.jpg);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: scroll;
+  background-size: cover;
+}
+
+header.fruit {
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
+    url(../imgs/product_page/orange.jpg);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: scroll;
+  background-size: cover;
+}
+
+header.herb {
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
+    url(../imgs/product_page/herb.jpg);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: scroll;
+  background-size: cover;
+}
+
+header.vegetable {
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
+    url(../imgs/product_page/vegetable.jpg);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: scroll;
+  background-size: cover;
+}
+
+/* PRODUCT PAGE */
+
+/* OTHER PAGE */
+
+#login {
+  background-image: url(../imgs/tomatoe.jpg);
+  background-position: center;
+  background-size: cover;
+}
+
+#login .login-inner {
+  background-image: url(../imgs/tomatoe_texture.jpg);
+}
+
+@media (max-width: 767px) {
+  #login,
+  #landing {
+    height: calc(100vh - 56px);
+  }
+}
+
+.container {
+  max-width: none !important;
+}
+
+.grid {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
 
 // CART PAGE
 #cart {
@@ -411,99 +598,6 @@ html {
 
 //about section
 
-$gradient-start: rgb(132, 202, 148);
-$gradient-end: rgb(37, 37, 37);
-
-#about .about-section {
-  max-width: 1200px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-header.masthead {
-  position: relative;
-  overflow: hidden;
-  padding-top: calc(7rem + 72px);
-  padding-bottom: 7rem;
-  background: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
-    url(../imgs/about/about-lettuce.jpg);
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-attachment: scroll;
-  background-size: cover;
-}
-
-header.allSeed {
-  background: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
-    url(../imgs/product_page/allseed.jpg);
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-attachment: scroll;
-  background-size: cover;
-}
-
-header.flower {
-  background: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
-    url(../imgs/product_page/flower.jpg);
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-attachment: scroll;
-  background-size: cover;
-}
-
-header.fruit {
-  background: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
-    url(../imgs/product_page/orange.jpg);
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-attachment: scroll;
-  background-size: cover;
-}
-
-header.herb {
-  background: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
-    url(../imgs/product_page/herb.jpg);
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-attachment: scroll;
-  background-size: cover;
-}
-
-header.vegetable {
-  background: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
-    url(../imgs/product_page/vegetable.jpg);
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-attachment: scroll;
-  background-size: cover;
-}
-
-header.masthead .masthead-content {
-  z-index: 1;
-  position: relative;
-}
-.masthead-heading {
-  font-size: 4rem;
-  margin: auto;
-  text-align: center;
-}
-header.masthead .masthead-content .masthead-subheading {
-  font-size: 2rem;
-}
-
-@media (min-width: 992px) {
-  header.masthead {
-    padding-top: 10rem;
-    padding-bottom: 10rem;
-  }
-  header.masthead .masthead-content .masthead-heading {
-    font-size: 6rem;
-  }
-  header.masthead .masthead-content .masthead-subheading {
-    font-size: 4rem;
-  }
-}
-
 /** Account Settings Page */
 #account {
   max-width: 1200px;
@@ -684,3 +778,30 @@ header.masthead .masthead-content .masthead-subheading {
     content: "";
   }
 }
+
+/* Profile Settings */
+
+/* Order History */
+
+.empty-order-history {
+  max-width: 600px;
+  margin: auto;
+
+  .icon-background {
+    border: 1px solid #000;
+    width: 100px;
+    height: 100px;
+    margin: 10px auto;
+    background: #ddd;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+  }
+
+  .fa-shopping-basket {
+    font-size: 30px;
+  }
+}
+
+/* Account */

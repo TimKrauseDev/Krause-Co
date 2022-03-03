@@ -22,7 +22,7 @@ const renderCartProducts = (products) =>
 const ShoppingCartDropdown = ({ shoppingSession }) => {
   return (
     <div className="container">
-      <div className="shopping-cart border border-dark mx-lg-5">
+      <div className="shopping-cart border border-dark mx-md-5">
         <div className="shopping-cart-header">
           <i className="fa fa-shopping-basket cart-icon"></i>
           <span className="badge bg-dark">
@@ -41,11 +41,8 @@ const ShoppingCartDropdown = ({ shoppingSession }) => {
         </ul>
 
         <div className="shopping-cart-buttons">
-          <Link to="/cart" className="button bg-warning text-dark">
+          <Link to="/cart" className="btn text-uppercase">
             View Basket
-          </Link>
-          <Link to="/checkout" className="button bg-success">
-            Checkout
           </Link>
         </div>
       </div>

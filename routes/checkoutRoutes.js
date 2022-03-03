@@ -7,11 +7,15 @@ const orderHistory = mongoose.model("orderHistory");
 
 module.exports = (app) => {
   app.post("/api/create-checkout-session", async (req, res) => {
-    const { lineItems, user_id } = req.body;
+    const { lineItems, user_id, email } = req.body;
 
     const session = await stripe.checkout.sessions.create({
       line_items: lineItems,
       mode: "payment",
+      phone_number_collection: {
+        enabled: true,
+      },
+      customer_email: email,
       payment_method_types: ["card"],
       shipping_address_collection: {
         allowed_countries: ["US", "CA"],
@@ -84,5 +88,13 @@ module.exports = (app) => {
     session.save();
 
     res.redirect(307, "/thank-you");
+  });
+
+  app.get("/api/orderhistory/:user_id", async (req, res) => {
+    const { user_id } = req.params;
+
+    const orders = await orderHistory.find({ user_id });
+
+    res.send(orders);
   });
 }; //end export

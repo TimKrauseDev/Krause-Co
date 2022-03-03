@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 
+import * as actions from "../../actions";
+
 import ProfileSettings from "./ProfileSettings";
 import OrderHistory from "./OrderHistory";
+import Logout from "./Logout";
 
 const Account = ({ auth }) => {
   const [activePage, setActivePage] = useState(0);
@@ -10,7 +13,6 @@ const Account = ({ auth }) => {
   if (!auth) return <div>Loading...</div>;
 
   const userJoinDate = new Date(auth.created_at);
-  console.log(userJoinDate.getMonth());
 
   return (
     <section id="account">
@@ -54,7 +56,7 @@ const Account = ({ auth }) => {
                   }`}
                   onClick={() => setActivePage(0)}
                 >
-                  <i className="fe-icon-user text-muted"></i>Profile Settings
+                  Profile Settings
                 </div>
                 <div
                   className={`list-group-item ${
@@ -62,7 +64,15 @@ const Account = ({ auth }) => {
                   }`}
                   onClick={() => setActivePage(1)}
                 >
-                  <i className="fe-icon-user text-muted"></i>Orders
+                  Order History
+                </div>
+                <div
+                  className={`list-group-item ${
+                    activePage === 2 ? "active" : ""
+                  }`}
+                  onClick={() => setActivePage(2)}
+                >
+                  Log Out
                 </div>
               </nav>
             </div>
@@ -75,6 +85,7 @@ const Account = ({ auth }) => {
             />
           )}
           {activePage === 1 && <OrderHistory />}
+          {activePage === 2 && <Logout />}
         </div>
       </div>
     </section>
@@ -85,4 +96,4 @@ const mapStateToProps = ({ auth }) => {
   return { auth };
 };
 
-export default connect(mapStateToProps, null)(Account);
+export default connect(mapStateToProps, actions)(Account);

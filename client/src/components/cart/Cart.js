@@ -35,7 +35,7 @@ const renderEmptyCart = () => {
   );
 };
 
-const handleCheckout = async (products, user_id) => {
+const handleCheckout = async (products, user_id, email) => {
   const lineItems = [];
 
   products.forEach((product) => {
@@ -46,11 +46,10 @@ const handleCheckout = async (products, user_id) => {
     return product;
   });
 
-  console.log("lineItems", lineItems);
-
   const res = await axios.post(`api/create-checkout-session`, {
     lineItems,
     user_id,
+    email,
   });
 
   window.location = res.data.url;
@@ -113,7 +112,8 @@ const Cart = ({ shoppingSession }) => {
                   onClick={() =>
                     handleCheckout(
                       shoppingSession.products,
-                      shoppingSession.user_id
+                      shoppingSession.user_id,
+                      shoppingSession.email
                     )
                   }
                 >

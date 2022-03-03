@@ -1,51 +1,53 @@
 /* eslint-disable default-case */
-import React from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
 import ShoppingCartDropdown from "./ShoppingCartDropdown";
 
+//render login
+const renderLogin = (auth) => {
+  switch (auth) {
+    case null:
+      return;
+    case false:
+      return (
+        <ul className="navbar-nav mx-md-3">
+          <li className="nav-item">
+            <Link
+              className="nav-item btn btn-outline-dark"
+              aria-current="page"
+              to="/login"
+            >
+              Login
+            </Link>
+          </li>
+        </ul>
+      );
+    default:
+      return (
+        <ul className="navbar-nav mx-md-3">
+          <li className="nav-item">
+            <Link className="nav-item" aria-current="page" to="/account">
+              <img
+                src={auth.photos}
+                alt="profile"
+                className="profile-picture"
+              />
+            </Link>
+          </li>
+        </ul>
+      );
+  }
+};
+
 export const Header = ({ auth, shoppingSession }) => {
-  const renderLogin = () => {
-    switch (auth) {
-      case null:
-        return;
-      case false:
-        return (
-          <ul className="navbar-nav mx-3">
-            <li className="nav-item ">
-              <Link
-                className="nav-item btn btn-outline-dark"
-                aria-current="page"
-                to="/login"
-              >
-                Login
-              </Link>
-            </li>
-          </ul>
-        );
-      default:
-        return (
-          <ul className="navbar-nav mx-3">
-            <li className="nav-item ">
-              <Link className="nav-item" aria-current="page" to="/account">
-                <img
-                  src={auth.photos}
-                  alt="profile"
-                  className="profile-picture"
-                  style={{ border: "2px solid #222" }}
-                />
-              </Link>
-            </li>
-          </ul>
-        );
-    }
-  };
+  const [dropDownActive, setDropDownActive] = useState(false);
 
   return (
     <header id="Header" className="">
-      <nav className="navbar navbar-expand-lg navbar-light bg-light border-bottom border-2 border-dark">
-        <div className="container px-4 px-lg-5">
+      <nav className="navbar navbar-expand-md navbar-light border-bottom border-2 border-dark">
+        <div className="container px-4 px-md-5">
           <Link className="navbar-brand" to="/">
             Krause Co
           </Link>
@@ -61,9 +63,9 @@ export const Header = ({ auth, shoppingSession }) => {
             <span className="navbar-toggler-icon"></span>
           </button>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul className="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+            <ul className="navbar-nav me-auto mb-2 mb-md-0 ms-md-4">
               <li className="nav-item">
-                <Link className="nav-link active" aria-current="page" to="/">
+                <Link className="nav-link" aria-current="page" to="/">
                   Home
                 </Link>
               </li>
@@ -112,22 +114,40 @@ export const Header = ({ auth, shoppingSession }) => {
                 </ul>
               </li>
             </ul>
-            {renderLogin()}
-            <Link to="/cart">
-              <form className="d-flex">
-                <button className="btn btn-outline-dark" type="submit">
-                  <i className="fa fa-shopping-basket me-1"></i>
+
+            {/* Basket Desktop */}
+            <div className="d-flex basket-desktop">
+              <button
+                className="btn basket-nav shadow-none p-0"
+                onClick={() => {
+                  setDropDownActive(!dropDownActive);
+                }}
+              >
+                <i className="fa fa-shopping-basket me-md-1"></i>
+                Basket
+                <span className="badge bg-dark text-white ms-md-1 rounded-pill">
+                  {shoppingSession ? shoppingSession.products.length : 0}
+                </span>
+              </button>
+            </div>
+
+            {/* Basket Mobile */}
+            <Link to="/cart" className="basket-mobile">
+              <div className="d-flex">
+                <button className="btn basket-nav shadow-none py-3 px-0 p-md-0">
+                  <i className="fa fa-shopping-basket me-2"></i>
                   Basket
-                  <span className="badge bg-dark text-white ms-1 rounded-pill">
+                  <span className="badge bg-dark text-white mx-1 rounded-pill">
                     {shoppingSession ? shoppingSession.products.length : 0}
                   </span>
                 </button>
-              </form>
+              </div>
             </Link>
+            {renderLogin(auth)}
           </div>
         </div>
       </nav>
-      <ShoppingCartDropdown />
+      {dropDownActive && <ShoppingCartDropdown />}
     </header>
   );
 };

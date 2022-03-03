@@ -128,7 +128,7 @@ const Product = ({
                   }
                 />
                 <button
-                  className="btn btn-outline-dark flex-shrink-0"
+                  className="btn flex-shrink-0"
                   type="button"
                   onClick={() => addToShoppingSession(productCount, prod)}
                 >

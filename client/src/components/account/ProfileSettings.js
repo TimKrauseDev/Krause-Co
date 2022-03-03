@@ -10,7 +10,7 @@ const ProfileSettings = ({ displayName, email, provider }) => {
       <form className="row">
         <div className="col-md-6 my-2">
           <div className="form-group">
-            <label for="display_name" className="pb-1">
+            <label htmlFor="display_name" className="pb-1">
               Display Name
             </label>
             <input
@@ -24,7 +24,7 @@ const ProfileSettings = ({ displayName, email, provider }) => {
         </div>
         <div className="col-md-6 my-2">
           <div className="form-group">
-            <label for="email" className="pb-1">
+            <label htmlFor="email" className="pb-1">
               Email Address
             </label>
             <input
@@ -38,7 +38,7 @@ const ProfileSettings = ({ displayName, email, provider }) => {
         </div>
         <div className="col-md-6 my-2">
           <div className="form-group">
-            <label for="provider" className="pb-1">
+            <label htmlFor="provider" className="pb-1">
               Sign In Provider
             </label>
             <input

@@ -14,7 +14,7 @@ const Landing = () => {
         <LinkContainer to="/shop" className="mx-auto">
           <button
             type="button"
-            className="btn btn-success text-uppercase text-center mx-auto d-block"
+            className="btn text-uppercase text-center mx-auto d-block"
           >
             View our seeds!
           </button>

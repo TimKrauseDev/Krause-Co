@@ -2,21 +2,18 @@ import React from "react";
 
 const About = () => {
   return (
-    <section id="about">
+    <section id="about" className="">
       <header className="masthead text-center text-white">
         <div className="masthead-content">
           <div className="container px-5">
             <h1 className="masthead-heading mb-0">Best damn seeds around.</h1>
-            <a className="btn btn-dark mt-5 text-uppercase" href="#scroll">
-              Learn More
-            </a>
           </div>
         </div>
       </header>
-      <section id="scroll" className="about-section">
-        <div className="container px-5">
+      <section id="scroll" className="about-section pt-5">
+        <div className="container px-2 px-md-5">
           <div className="row gx-5 align-items-center">
-            <div className="col-lg-6 order-lg-2">
+            <div className="col-md-6 order-md-2">
               <div className="p-5">
                 <img
                   className="img-fluid rounded-circle"
@@ -25,7 +22,7 @@ const About = () => {
                 />
               </div>
             </div>
-            <div className="col-lg-6 order-lg-1">
+            <div className="col-md-6 order-md-1">
               <div className="p-5">
                 <h2 className="display-4">Always high germination rates...</h2>
                 <p>
@@ -40,9 +37,9 @@ const About = () => {
         </div>
       </section>
       <section className="about-section">
-        <div className="container px-5">
+        <div className="container px-2 px-md-5">
           <div className="row gx-5 align-items-center">
-            <div className="col-lg-6">
+            <div className="col-md-6">
               <div className="p-5">
                 <img
                   className="img-fluid rounded-circle"
@@ -51,7 +48,7 @@ const About = () => {
                 />
               </div>
             </div>
-            <div className="col-lg-6">
+            <div className="col-md-6">
               <div className="p-5">
                 <h2 className="display-4">Quality Controlled</h2>
                 <p>
@@ -66,10 +63,10 @@ const About = () => {
         </div>
       </section>
 
-      <section className="about-section">
-        <div className="container px-5">
+      <section className="about-section pb-5">
+        <div className="container px-2 px-md-5">
           <div className="row gx-5 align-items-center">
-            <div className="col-lg-6 order-lg-2">
+            <div className="col-md-6 order-md-2">
               <div className="p-5">
                 <img
                   className="img-fluid rounded-circle"
@@ -78,7 +75,7 @@ const About = () => {
                 />
               </div>
             </div>
-            <div className="col-lg-6 order-lg-1">
+            <div className="col-md-6 order-md-1">
               <div className="p-5">
                 <h2 className="display-4">High Yield Plants</h2>
                 <p>

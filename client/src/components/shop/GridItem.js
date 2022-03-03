@@ -19,10 +19,7 @@ const GridItem = ({ product }) => {
           <div className="card-body-bottom"></div>
           <div className="d-flex justify-content-between align-items-center mt-2">
             <div className="btn-group">
-              <a
-                href={`/product/${product.slug}`}
-                className="btn btn-sm btn-outline-dark"
-              >
+              <a href={`/product/${product.slug}`} className="btn btn-sm">
                 View Product
               </a>
             </div>
