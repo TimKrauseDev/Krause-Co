@@ -2,7 +2,7 @@
 
 Source code for [Krause Co](https://krause-co.herokuapp.com/), built using the MERN Stack.
 
-<img width="600" alt="portfolio home" src="./imgs/home.PNG">
+<img alt="portfolio home" src="./imgs/home.PNG">
 
 ## Overview
 
