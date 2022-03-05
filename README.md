@@ -1,27 +1,40 @@
 # Krause Co
 
-View the live version [HERE](https://krause-co.herokuapp.com/).
+Source code for [Krause Co](https://krause-co.herokuapp.com/), built using the MERN Stack.
 
-
+<img width="600" alt="portfolio home" src="./imgs/home.PNG">
 
 ## Overview
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+This e-commerce website was built on the MERN stack. Website features include: authentication; database storage using RESTful API and MongoDB for products, user's shopping sessions and order history; and a checkout flow throgh Stripe's API.
 
- This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app) and deployed to [Firebase](https://firebase.google.com/). Below you can find the technology used, layout of the directories and most importantly, where to go to see the live version.
+## About
 
-## View Live Site
-View the live version [Here](https://krause-co.herokuapp.com/).
+<img width="600" alt="portfolio home" src="./imgs/about.PNG">
+
+## Shop
+
+<img width="600" alt="portfolio home" src="./imgs/shop.PNG">
+
+## Account
+
+<img width="600" alt="portfolio home" src="./imgs/account.PNG">
 
 
 ## Technology Used
-- Node.js
-- Express
-- MongoDB
-- Mongoose
-- Passport
-- React
-- Bootstrap
-- Axios
+The technology used to create this portfolio include:
 
-## Directory 
+- Node.js
+- MongoDB
+- Express
+- React
+- Redux
+- React Router
+- Boostrap
+- SASS
+- Passport
+- Stripe
+- Postman
+
+## Contact
+If you have any questions about the front-end project, my work or if you have any opportunities you would I would be a good fit for, please [contact me](https://timkrause.dev/#contact).
