@@ -8,17 +8,11 @@ Source code for [Krause Co](https://krause-co.herokuapp.com/), built using the M
 
 This e-commerce website was built on the MERN stack. Website features include: authentication; database storage using RESTful API and MongoDB for products, user's shopping sessions and order history; and a checkout flow throgh Stripe's API.
 
-## About
 
-<img width="600" alt="portfolio home" src="./imgs/about.PNG">
-
-## Shop
-
-<img width="600" alt="portfolio home" src="./imgs/shop.PNG">
-
-## Account
-
-<img width="600" alt="portfolio home" src="./imgs/account.PNG">
+<img alt="portfolio home" src="./imgs/about.png">
+<img alt="portfolio home" src="./imgs/shop.png">
+<br />
+<img alt="portfolio home" src="./imgs/account.png">
 
 
 ## Technology Used
