@@ -41,6 +41,7 @@ const App = ({ fetchUserAndShoppingSession }) => {
         <Route path="product/:slug" element={<Product />} />
         <Route path="cart" element={<Cart />} />
         <Route path="thank-you" element={<ThankYouPage />} />
+        <Route path="*" element={<Landing />} />
       </Routes>
       <Footer />
     </BrowserRouter>

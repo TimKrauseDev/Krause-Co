@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import * as actions from "../../actions";
 
@@ -14,6 +15,25 @@ const validateProductCount = (el, inv, setProductCount) => {
   } else {
     setProductCount(parseInt(el.target.value) || 0);
   }
+};
+
+const renderPageNotFound = () => {
+  return (
+    <section id="product" className="p-5">
+      <div className="empty-order-history d-md-flex align-items-md-center">
+        <div className="container text-center space-2 space-3--lg">
+          <div className="w-md-80 w-lg-60 text-center mx-md-auto">
+            <div className="mb-5">
+              <h1 className="h2">404. Page not found.</h1>
+            </div>
+            <Link to="/shop" className="btn btn-dark btn-wide">
+              Start Shopping
+            </Link>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
 };
 
 const Product = ({
@@ -33,7 +53,7 @@ const Product = ({
   }, [fetchProductBySlug, slug]);
 
   if (!prod) {
-    return <div>Loading...</div>;
+    return renderPageNotFound();
   }
 
   const addToShoppingSession = (productCount, product, auth) => {
@@ -64,7 +84,6 @@ const Product = ({
 
   return (
     <section id="product" className="py-5">
-      {!prod && <h2 className="text-center">No Product</h2>}
       {prod && (
         <div className="container-xl px-4 px-lg-5 my-5">
           <div className="row gx-4 gx-lg-5 align-items-center">
