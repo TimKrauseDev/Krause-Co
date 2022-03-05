@@ -80,8 +80,11 @@ const Cart = ({ shoppingSession }) => {
                 shoppingSession.products
               )}
 
-              <div className="back-to-shop" onClick={() => navigate(-1)}>
-                <div className="back-to-shop-button d-inline-block">
+              <div className="back-to-shop">
+                <div
+                  className="back-to-shop-button d-inline-block pointer"
+                  onClick={() => navigate(-1)}
+                >
                   <i className="fa fa-arrow-left me-2"></i>
                   <span className="text-muted">Back to shop</span>
                 </div>

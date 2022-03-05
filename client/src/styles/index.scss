@@ -589,4 +589,15 @@ header.vegetable {
   }
 }
 
-/* Account */
+/* Shopping Basket */
+
+#cart {
+  .pointer {
+    cursor: pointer;
+  }
+
+  .cart-quantity-decrease {
+    position: relative;
+    bottom: 1px;
+  }
+}

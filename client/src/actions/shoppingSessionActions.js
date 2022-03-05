@@ -33,7 +33,6 @@ export const removeProductFromShoppingSession =
 // PUT UPDATE PRODUCT QUANTITY
 export const updateProductQuantity =
   (userID, productUpdate) => async (dispatch) => {
-    console.log("update", productUpdate);
     const res = await axios.put(
       `/api/shoppingsession/updatequantity/${userID}`,
       productUpdate
