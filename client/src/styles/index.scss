@@ -600,4 +600,8 @@ header.vegetable {
     position: relative;
     bottom: 1px;
   }
+
+  .checkout-toast .toast-header {
+    background: $green;
+  }
 }

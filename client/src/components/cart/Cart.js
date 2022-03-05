@@ -2,6 +2,7 @@ import React from "react";
 import axios from "axios";
 import { connect } from "react-redux";
 import { useNavigate, Link } from "react-router-dom";
+import { Toast } from "react-bootstrap";
 
 import CartItem from "./CartItem";
 
@@ -68,13 +69,13 @@ const Cart = ({ shoppingSession }) => {
       return renderEmptyCart();
     } else {
       return (
-        <section id="cart" className="col-md-8 pb-5">
+        <section id="cart" className="col-md-7 pb-5">
           <div className="row">
             <h3 className="">Shopping Basket</h3>
           </div>
           <hr />
           <div className="row">
-            <div className="col-md-8 cart-content p-4">
+            <div className="col-md-7 cart-content p-4">
               {renderCartProducts(
                 shoppingSession.user_id,
                 shoppingSession.products
@@ -90,7 +91,7 @@ const Cart = ({ shoppingSession }) => {
                 </div>
               </div>
             </div>
-            <div className="col-md-4 summary p-4">
+            <div className="col-md-5 summary p-4">
               <div>
                 <h5>
                   <b>Summary</b>
@@ -117,6 +118,25 @@ const Cart = ({ shoppingSession }) => {
                 >
                   Checkout
                 </button>
+                <Toast
+                  // onClose={() => setShowToastFailure(false)}
+                  // show={showToastFailure}
+                  delay={3000}
+                  autohide
+                  className="border-2 border-dark mt-2 p-0 checkout-toast"
+                >
+                  <Toast.Header className="text-white" closeButton={false}>
+                    <p className="me-auto mb-0 text-uppercase">
+                      Note for Checkout
+                    </p>
+                  </Toast.Header>
+                  <Toast.Body className="bg-white">
+                    Use these test card numbers: <br /> <strong>Succeed</strong>{" "}
+                    - 4242 4242 4242 4242 <br /> <strong>Authentication</strong>{" "}
+                    - 4000 0025 0000 3155
+                    <br /> <strong>Decline</strong> - 4000 0000 0000 9995
+                  </Toast.Body>
+                </Toast>
               </div>
             </div>
           </div>
