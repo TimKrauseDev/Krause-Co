@@ -53,7 +53,7 @@ const Account = ({ auth }) => {
   }
 
   if (!auth) {
-    <div>Loading...</div>;
+    return <div>Loading...</div>;
   }
 
   const userJoinDate = new Date(auth.created_at);
