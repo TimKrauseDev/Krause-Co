@@ -10,12 +10,9 @@ const renderEmptyOrderHistory = () => {
       <div className="container text-center space-2 space-3--lg">
         <div className="w-md-80 w-lg-60 text-center mx-md-auto">
           <div className="mb-5">
-            <div className="icon-background">
-              <span className="fa fa-shopping-basket"></span>
-            </div>
-            <h1 className="h2">Your order history is currently empty.</h1>
+            <h2>Your order history is currently empty.</h2>
           </div>
-          <Link to="/shop" className="btn btn-dark btn-wide">
+          <Link to="/shop" className="btn text-uppercase">
             Start Shopping
           </Link>
         </div>
@@ -26,8 +23,6 @@ const renderEmptyOrderHistory = () => {
 
 const renderOrderItems = (products) =>
   products.map((product, index) => {
-    console.log(product);
-
     return (
       <div className="cart-item row border-top border-bottom" key={index}>
         <div className="row main align-items-center">
@@ -91,7 +86,7 @@ const OrderHistory = ({ auth, orderHistory, fetchOrderHistory }) => {
   }, [auth, fetchOrderHistory]);
 
   if (!orderHistory) {
-    return <div>Loading...</div>;
+    return <div className="col-md-8 pb-5">Loading...</div>;
   }
 
   return (

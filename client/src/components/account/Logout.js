@@ -7,13 +7,13 @@ const Logout = () => {
         <h3 className="">Log Out</h3>
       </div>
       <hr />
-      <div className="empty-order-history d-md-flex align-items-md-center height-100vh--md">
+      <div className="empty-order-history d-md-flex align-items-md-center">
         <div className="container text-center space-2 space-3--lg">
           <div className="w-md-80 w-lg-60 text-center mx-md-auto">
             <div className="mb-5">
-              <h1 className="mt-5">We're sorry to see you go!</h1>
+              <h2 className="">We're sorry to see you go!</h2>
             </div>
-            <a href="/api/logout" className="btn btn-dark btn-wide">
+            <a href="/api/logout" className="btn text-uppercase">
               Log Out
             </a>
           </div>

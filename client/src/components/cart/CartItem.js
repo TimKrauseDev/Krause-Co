@@ -28,7 +28,7 @@ const CartItem = ({
   updateProductQuantity,
 }) => {
   return (
-    <div className="cart-item row border-top border-bottom">
+    <div className="cart-item row pb-4">
       <div className="row main align-items-center">
         <div className="col-2">
           <img

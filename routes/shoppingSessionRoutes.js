@@ -33,20 +33,24 @@ router.post("/shoppingsession", async (req, res) => {
 });
 
 // PUT ADD ITEM TO SHOPPING SESSION
-router.put("/shoppingsession/additem/:user_id", async (req, res) => {
-  const { user_id } = req.params;
-  const { subtotal } = req.body;
-  const product = req.body;
+router.put(
+  "/shoppingsession/additem/:user_id",
 
-  const session = await ShoppingSession.findOne({ user_id });
+  async (req, res) => {
+    const { user_id } = req.params;
+    const { subtotal } = req.body;
+    const product = req.body;
 
-  session.total = session.total + subtotal;
-  session.products = [...session.products, product];
+    const session = await ShoppingSession.findOne({ user_id });
 
-  session.save();
+    session.total = session.total + subtotal;
+    session.products = [...session.products, product];
 
-  res.send(session);
-});
+    session.save();
+
+    res.send(session);
+  }
+);
 
 // PUT REMOVE ITEM FROM SHOPPING SESSION
 router.put("/shoppingsession/removeitem/:user_id", async (req, res) => {

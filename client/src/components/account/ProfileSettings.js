@@ -1,6 +1,13 @@
 import React from "react";
+import { connect } from "react-redux";
 
-const ProfileSettings = ({ displayName, email, provider }) => {
+const ProfileSettings = ({ auth }) => {
+  if (!auth) {
+    return <div className="col-md-8 pb-5">Loading...</div>;
+  }
+
+  const { display_name, email, provider } = auth;
+
   return (
     <div id="profile-settings" className="col-md-8 pb-5">
       <div className="row">
@@ -17,7 +24,7 @@ const ProfileSettings = ({ displayName, email, provider }) => {
               className="form-control"
               type="text"
               id="display_name"
-              value={displayName}
+              value={display_name}
               disabled="disabled"
             />
           </div>
@@ -55,4 +62,8 @@ const ProfileSettings = ({ displayName, email, provider }) => {
   );
 };
 
-export default ProfileSettings;
+const mapStateToProps = ({ auth }) => {
+  return { auth };
+};
+
+export default connect(mapStateToProps, null)(ProfileSettings);

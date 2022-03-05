@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 import { useParams } from "react-router-dom";
 import * as actions from "../../actions";
 
+import { Toast } from "react-bootstrap";
+
 const validateProductCount = (el, inv, setProductCount) => {
   const num = parseInt(el.target.value);
   if (num > inv) {
@@ -23,13 +25,23 @@ const Product = ({
 }) => {
   const slug = useParams().slug || "No Product";
   const [productCount, setProductCount] = useState(1);
+  const [showToastFailure, setShowToastFailure] = useState(false);
+  const [showToastSuccess, setShowToastSuccess] = useState(false);
 
   useEffect(() => {
     fetchProductBySlug(slug);
   }, [fetchProductBySlug, slug]);
 
-  const addToShoppingSession = (productCount, product) => {
+  if (!prod) {
+    return <div>Loading...</div>;
+  }
+
+  const addToShoppingSession = (productCount, product, auth) => {
     if (!productCount) return;
+    if (!auth) {
+      setShowToastFailure(true);
+      return;
+    }
 
     /**
      * TODO:
@@ -47,6 +59,7 @@ const Product = ({
     };
 
     addProductToShoppingSession(shoppingSession.user_id, productData);
+    setShowToastSuccess(true);
   };
 
   return (
@@ -113,6 +126,14 @@ const Product = ({
                   </p>
                 </div>
               </div>
+              <div className="row my-3">
+                <div className="col">
+                  <p>
+                    <span className="fw-bold">In Stock: </span>
+                    {prod.inventory || "0"}
+                  </p>
+                </div>
+              </div>
               <div className="small mb-1 text-capitalize fw-bold">Quantity</div>
 
               <div className="d-flex">
@@ -128,18 +149,49 @@ const Product = ({
                   }
                 />
                 <button
-                  className="btn flex-shrink-0"
+                  className="btn flex-shrink-0 text-uppercase"
                   type="button"
-                  onClick={() => addToShoppingSession(productCount, prod)}
+                  onClick={() => addToShoppingSession(productCount, prod, auth)}
                 >
-                  <i className="fa fa-shopping-cart me-1"></i>
-                  Add to cart
+                  Add to Basket
                 </button>
               </div>
             </div>
           </div>
         </div>
       )}
+      {/* Toast Failure */}
+      <Toast
+        onClose={() => setShowToastFailure(false)}
+        show={showToastFailure}
+        delay={3000}
+        autohide
+        className="border-2 border-dark m-2"
+        style={{ position: "fixed", top: "0px", right: "0px" }}
+      >
+        <Toast.Header className="text-white bg-danger" closeVariant="white">
+          <p className="me-auto mb-0 text-uppercase">Warning</p>
+        </Toast.Header>
+        <Toast.Body className="bg-white">
+          Please sign in to add items to basket.
+        </Toast.Body>
+      </Toast>
+      {/* Toast Sucess */}
+      <Toast
+        onClose={() => setShowToastSuccess(false)}
+        show={showToastSuccess}
+        delay={3000}
+        autohide
+        className="border-2 border-dark m-2"
+        style={{ position: "fixed", top: "0px", right: "0px" }}
+      >
+        <Toast.Header className="text-white" closeVariant="white">
+          <p className="me-auto mb-0 text-uppercase">Awesome!</p>
+        </Toast.Header>
+        <Toast.Body className="bg-white">
+          {`${prod.name} has been successfully added to your basket.`}
+        </Toast.Body>
+      </Toast>
     </section>
   );
 };

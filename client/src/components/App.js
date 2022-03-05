@@ -13,6 +13,9 @@ import Product from "./product/Product";
 import Cart from "./cart/Cart";
 import ThankYouPage from "./cart/ThankYouPage";
 import Account from "./account/Account";
+import ProfileSettings from "./account/ProfileSettings";
+import OrderHistory from "./account/OrderHistory";
+import Logout from "./account/Logout";
 
 const App = ({ fetchUserAndShoppingSession }) => {
   useEffect(() => {
@@ -23,15 +26,21 @@ const App = ({ fetchUserAndShoppingSession }) => {
     <BrowserRouter>
       <Header />
       <Routes>
-        <Route path="/" element={<Landing />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/account" element={<Account />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/shop/:category" element={<Shop />} />
-        <Route path="/shop" element={<Shop />} />
-        <Route path="/product/:slug" element={<Product />} />
-        <Route path="/cart" element={<Cart />} />
-        <Route path="/thank-you" element={<ThankYouPage />} />
+        <Route path="/" index element={<Landing />} />
+        <Route path="login" element={<Login />} />
+        <Route path="account" element={<Account />}>
+          <Route index element={<ProfileSettings />} />
+          <Route path="basket" element={<Cart />} />
+          <Route path="orders" element={<OrderHistory />} />
+          <Route path="logout" element={<Logout />} />
+          <Route path="*" element={<ProfileSettings />} />
+        </Route>
+        <Route path="about" element={<About />} />
+        <Route path="shop/:category" element={<Shop />} />
+        <Route path="shop" element={<Shop />} />
+        <Route path="product/:slug" element={<Product />} />
+        <Route path="cart" element={<Cart />} />
+        <Route path="thank-you" element={<ThankYouPage />} />
       </Routes>
       <Footer />
     </BrowserRouter>

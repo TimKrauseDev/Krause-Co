@@ -4,12 +4,20 @@ import { Link } from "react-router-dom";
 
 import DropDownItem from "./DropDownItem";
 
-const renderCartProducts = (products) =>
-  products.map((product, index) => {
+const renderCartProducts = (products) => {
+  if (products.length === 0) {
+    return (
+      <p className="text-muted text-center m-0 py-2">
+        No items currently in basket.
+      </p>
+    );
+  }
+
+  return products.map((product, index) => {
     if (index === 3) {
       return (
-        <p key={index} className="text-muted m-0 seemore">
-          ...
+        <p key={index} className="text-muted text-center m-0 py-2">
+          View basket to see all items
         </p>
       );
     } else if (index > 3) {
@@ -18,8 +26,9 @@ const renderCartProducts = (products) =>
 
     return <DropDownItem key={index} product={product} />;
   });
+};
 
-const ShoppingCartDropdown = ({ shoppingSession }) => {
+const ShoppingCartDropdown = ({ shoppingSession, closeDropdown }) => {
   return (
     <div className="container">
       <div className="shopping-cart border border-dark mx-md-5">
@@ -38,12 +47,23 @@ const ShoppingCartDropdown = ({ shoppingSession }) => {
 
         <ul className="shopping-cart-items">
           {shoppingSession && renderCartProducts(shoppingSession.products)}
+          {shoppingSession === false && (
+            <p className="text-muted text-center m-0 py-2">
+              Please login to add items to your basket.
+            </p>
+          )}
         </ul>
 
         <div className="shopping-cart-buttons">
-          <Link to="/cart" className="btn text-uppercase">
-            View Basket
-          </Link>
+          {shoppingSession && (
+            <Link
+              to="/account/basket"
+              className="btn text-uppercase"
+              onClick={closeDropdown}
+            >
+              View Basket
+            </Link>
+          )}
         </div>
       </div>
     </div>

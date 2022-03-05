@@ -1,22 +1,66 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
+import { Link, Outlet, useLocation } from "react-router-dom";
 
 import * as actions from "../../actions";
 
-import ProfileSettings from "./ProfileSettings";
-import OrderHistory from "./OrderHistory";
-import Logout from "./Logout";
+const renderNotLoggedIn = () => {
+  return (
+    <section id="account" className="p-5">
+      <div className="empty-order-history d-md-flex align-items-md-center">
+        <div className="container text-center space-2 space-3--lg">
+          <div className="w-md-80 w-lg-60 text-center mx-md-auto">
+            <div className="mb-5">
+              <h1 className="h2">Please Login To Continue.</h1>
+            </div>
+            <Link to="/shop" className="btn btn-dark btn-wide">
+              Start Shopping
+            </Link>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
 
 const Account = ({ auth }) => {
   const [activePage, setActivePage] = useState(0);
 
-  if (!auth) return <div>Loading...</div>;
+  const { pathname } = useLocation();
+  const page = pathname.split("/")[2];
+
+  useEffect(() => {
+    switch (page) {
+      case "settings":
+        setActivePage(0);
+        break;
+      case "basket":
+        setActivePage(1);
+        break;
+      case "orders":
+        setActivePage(2);
+        break;
+      case "logout":
+        setActivePage(3);
+        break;
+      default:
+        setActivePage(0);
+    }
+  }, [page]);
+
+  if (auth === false) {
+    return renderNotLoggedIn();
+  }
+
+  if (!auth) {
+    <div>Loading...</div>;
+  }
 
   const userJoinDate = new Date(auth.created_at);
 
   return (
     <section id="account">
-      <div className="container mt-5">
+      <div className="container pt-5">
         <div className="row">
           <div className="col-md-4 pb-5">
             <div className="author-card pb-3">
@@ -25,6 +69,10 @@ const Account = ({ auth }) => {
                 <div className="author-card-avatar">
                   <img
                     src={auth.photos}
+                    onError={(e) => {
+                      e.target.onError = null;
+                      e.target.src = require("../../imgs/account/default_img.png");
+                    }}
                     alt="profile"
                     className="profile-picture"
                   />
@@ -50,42 +98,46 @@ const Account = ({ auth }) => {
             </div>
             <div className="wizard">
               <nav className="list-group list-group-flush">
-                <div
+                <Link
+                  to="settings"
                   className={`list-group-item ${
                     activePage === 0 ? "active" : ""
                   }`}
-                  onClick={() => setActivePage(0)}
+                  //onClick={() => setActivePage(0)}
                 >
                   Profile Settings
-                </div>
-                <div
+                </Link>
+                <Link
+                  to="basket"
                   className={`list-group-item ${
                     activePage === 1 ? "active" : ""
                   }`}
-                  onClick={() => setActivePage(1)}
+                  //onClick={() => setActivePage(0)}
                 >
-                  Order History
-                </div>
-                <div
+                  Shopping Basket
+                </Link>
+                <Link
+                  to="orders"
                   className={`list-group-item ${
                     activePage === 2 ? "active" : ""
                   }`}
-                  onClick={() => setActivePage(2)}
+                  //onClick={() => setActivePage(1)}
+                >
+                  Order History
+                </Link>
+                <Link
+                  to="logout"
+                  className={`list-group-item ${
+                    activePage === 3 ? "active" : ""
+                  }`}
+                  //onClick={() => setActivePage(2)}
                 >
                   Log Out
-                </div>
+                </Link>
               </nav>
             </div>
           </div>
-          {activePage === 0 && (
-            <ProfileSettings
-              displayName={auth.display_name}
-              email={auth.email}
-              provider={auth.provider}
-            />
-          )}
-          {activePage === 1 && <OrderHistory />}
-          {activePage === 2 && <Logout />}
+          <Outlet />
         </div>
       </div>
     </section>

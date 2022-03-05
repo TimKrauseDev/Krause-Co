@@ -1,5 +1,5 @@
 /* eslint-disable default-case */
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
@@ -31,6 +31,10 @@ const renderLogin = (auth) => {
             <Link className="nav-item" aria-current="page" to="/account">
               <img
                 src={auth.photos}
+                onError={(e) => {
+                  e.target.onError = null;
+                  e.target.src = require("../../imgs/account/default_img.png");
+                }}
                 alt="profile"
                 className="profile-picture"
               />
@@ -41,8 +45,36 @@ const renderLogin = (auth) => {
   }
 };
 
+const useOutsideAlerter = (ref, dropDownActive, setDropDownActive) => {
+  useEffect(() => {
+    function handleClickOutside(e) {
+      const flag = Array.from(e.srcElement.classList).includes("basket-nav");
+      if (
+        ref.current &&
+        !ref.current.contains(e.target) &&
+        dropDownActive &&
+        !flag
+      ) {
+        setDropDownActive(false);
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [ref, dropDownActive, setDropDownActive]);
+};
+
 export const Header = ({ auth, shoppingSession }) => {
   const [dropDownActive, setDropDownActive] = useState(false);
+
+  const wrapperRef = useRef(null);
+  useOutsideAlerter(wrapperRef, dropDownActive, setDropDownActive);
+
+  const closeDropdown = () => {
+    setDropDownActive(false);
+  };
 
   return (
     <header id="Header" className="">
@@ -147,7 +179,11 @@ export const Header = ({ auth, shoppingSession }) => {
           </div>
         </div>
       </nav>
-      {dropDownActive && <ShoppingCartDropdown />}
+      <div ref={wrapperRef}>
+        {dropDownActive && (
+          <ShoppingCartDropdown closeDropdown={closeDropdown} />
+        )}
+      </div>
     </header>
   );
 };
