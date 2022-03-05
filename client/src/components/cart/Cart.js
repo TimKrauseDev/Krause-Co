@@ -51,7 +51,7 @@ const handleCheckout = async (products, user_id, email) => {
     return product;
   });
 
-  const res = await axios.post(`api/create-checkout-session`, {
+  const res = await axios.post(`/api/create-checkout-session`, {
     lineItems,
     user_id,
     email,
