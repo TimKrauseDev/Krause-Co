@@ -10,6 +10,7 @@ This e-commerce website was built on the MERN stack. Website features include: a
 
 
 <img alt="portfolio home" src="./imgs/about.png">
+<br />
 <img alt="portfolio home" src="./imgs/shop.png">
 <br />
 <img alt="portfolio home" src="./imgs/account.png">
