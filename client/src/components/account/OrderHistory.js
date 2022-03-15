@@ -44,7 +44,7 @@ const renderOrderItems = (products) =>
               className="cart-quantity-number"
               style={{ display: "inline-block" }}
             >
-              Qty{product.quantity}
+              Qty {product.quantity}
             </div>
           </div>
           <div className="col text-end fs-6 fw-normal">
