@@ -63,6 +63,7 @@ module.exports = (app) => {
     });
 
     session.products = [];
+    session.total = 0;
 
     session.save();
 
