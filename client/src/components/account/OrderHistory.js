@@ -73,7 +73,7 @@ const renderOrders = (orders) =>
         </h4>
 
         {renderOrderItems(order.products)}
-        <p className="text-end py-2">Total: $ {order.total}</p>
+        <p className="text-end py-2">Total: $ {order.total.toFixed(2)}</p>
       </div>
     );
   });
