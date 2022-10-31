@@ -1,6 +1,6 @@
 # Krause Co
 
-Source code for [Krause Co](https://krause-co.herokuapp.com/), built using the MERN Stack.
+Source code for [Krause Co](https://krauseco.timkrause.dev/), built using the MERN Stack.
 
 <img alt="portfolio home" src="./imgs/home.PNG">
 
